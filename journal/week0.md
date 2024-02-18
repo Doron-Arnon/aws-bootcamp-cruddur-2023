@@ -14,3 +14,14 @@ foreach(var employee in employees)
 ```
 
 ![image](https://github.com/Doron-Arnon/aws-bootcamp-cruddur-2023/assets/159636695/3de15e1c-f4b8-4053-b12a-356c682e54de)
+
+- 1
+- 2
+- 3
+- 4
+
+1. 1111
+2. 2222
+3. 3333
+4. 4444
+
