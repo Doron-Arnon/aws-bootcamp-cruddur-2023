@@ -3,6 +3,8 @@ from flask import request
 from flask_cors import CORS, cross_origin
 import os
 
+from lib.cognito_jwt_token import CognitoJwtToken, extract_access_token, TokenVerifyError
+
 from services.home_activities import *
 from services.notifications_activities import *
 from services.user_activities import *
@@ -156,6 +158,15 @@ def data_create_message():
 
 @app.route("/api/activities/home", methods=['GET'])
 def data_home():
+  access_token = extract_access_token(request)
+  try:
+    claims = cognito_jwt_token.verify(access_token)
+    # authenticated request
+    app.logger.debug("authenticated")
+    app.logger.debug(claims);
+  except TokenVerifyError as e:
+    app.logger.debug("unauthenticated")
+
   data = HomeActivities.run()
   return data, 200
 
