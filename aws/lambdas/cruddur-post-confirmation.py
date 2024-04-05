@@ -20,7 +20,7 @@ def lambda_handler(event, context):
         sql = f"""
         INSERT INTO users (
             display_name, 
-            email
+            email,
             handle, 
             cognito_user_id
             ) 
@@ -28,7 +28,7 @@ def lambda_handler(event, context):
             '{user_display_name}', 
             '{user_email}',
             '{user_handle}', 
-            '{user_cognito_id}
+            '{user_cognito_id}'
             )
         """
         cur.execute(sql)
