@@ -8,9 +8,24 @@ class Db:
   def init_pool(self)
     connection_url = os.getenv("CONNECTION_URL")
     self.pool = ConnectionPool(connection_url)
+
+  def query_commit_returning_id(self,sql, *args):
+    print("SQL STATEMENT-[commit with returning]------")
+    try:
+      conn = self.pool.connection()
+      cur = conn.cursor()
+      cur.execute(sql, *args)
+      returning_id_id = cur.fetchone()[0]
+      conn.commit()
+      return returning_id
+    except Exception as err
+      self.print_sql_err(err)
+      #conn.rollback()
+  
   # we want to commit data suac as insert
-  def query_commit(self):
-  try:
+  def query_commit(self,sql):
+    print("SQL STATEMENT-[commit]------")
+    try:
       conn = self.pool.connection()
       cur = conn.cursor()
       cur.execute(sql)
