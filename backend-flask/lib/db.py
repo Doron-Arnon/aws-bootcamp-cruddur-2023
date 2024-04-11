@@ -1,5 +1,7 @@
 from psycopg_pool import ConnectionPool
 import os
+import re
+import sys
 
 class Db:
   def __init__(self):
@@ -8,32 +10,29 @@ class Db:
   def init_pool(self)
     connection_url = os.getenv("CONNECTION_URL")
     self.pool = ConnectionPool(connection_url)
-
-  def query_commit_returning_id(self,sql, *args):
+  
+  # we want to commit data such as insert
+  # be sure to check for RETURNING in all uppercases
+  def query_commit(self,sql,params):
     print("SQL STATEMENT-[commit with returning]------")
+    print(sql + "\n")
+    
+    pattern = r"\bRETURNING\b"
+    is_returning_id = re.search(pattern, sql)
+    
     try:
       conn = self.pool.connection()
       cur = conn.cursor()
-      cur.execute(sql, *args)
-      returning_id_id = cur.fetchone()[0]
+      cur.execute(sql, params)
+      if is_returning_id:
+        returning_id_id = cur.fetchone()[0]  
       conn.commit()
-      return returning_id
+      if is_returning_id:
+        return returning_id
     except Exception as err
       self.print_sql_err(err)
       #conn.rollback()
-  
-  # we want to commit data suac as insert
-  def query_commit(self,sql):
-    print("SQL STATEMENT-[commit]------")
-    try:
-      conn = self.pool.connection()
-      cur = conn.cursor()
-      cur.execute(sql)
-      conn.commit()
-    except Exception as err
-      self.print_sql_err(err)
-      #conn.rollback()
-  
+    
   # when we want to return a json object
   def query_array_json(self,sql):
     print("SQL STATEMENT-[array]-----")
@@ -86,9 +85,7 @@ class Db:
     print("\rpsycopg2 ERROR:", err, "on line number:", line_num)
     print("psycopg2 traceback:", traceback, "-- type:", err_type)
 
-
-    print("\rextensions.Diagnostics:" err.diag)
-
+    #print("\rextensions.Diagnostics:" err.diag)
 
     print("pgerror:", err.pgerror)
     print("pgcode:" err.pgcode, "\n")
