@@ -5,15 +5,13 @@ from lib.db import db
 
 class CreateActivity:
 
-  def validations():
+  #def validations():
 
   def run(message, user_handle, ttl):
     model = {
       'errors': None,
       'data': None
     }
-
-
 
     now = datetime.now(timezone.utc).astimezone()
 
@@ -49,7 +47,7 @@ class CreateActivity:
       }   
     else:
       expires_at = (now + ttl_offset)
-      CreateActivity.create_activity(user_handle, messages, expires_at)
+      CreateActivity.create_activity(user_handle, message, expires_at)
       model['data'] = {
         'uuid': uuid.uuid4(),
         'display_name': 'Andrew Brown',
@@ -63,9 +61,9 @@ class CreateActivity:
   def create_activity(handle, message, expies_at):
     sql = db.template('create_activity')
     uuid = db.query_commit(sql,{
-      'handle'=handle,
-      'message'=message,
-      'expires_at'=expires_at
+      'handle':handle,
+      'message':message,
+      'expires_at':expires_at
       })
 
 

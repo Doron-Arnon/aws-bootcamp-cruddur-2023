@@ -15,13 +15,13 @@ class Db:
     return template_content
 
 
-  def init_pool(self)
+  def init_pool(self):
     connection_url = os.getenv("CONNECTION_URL")
     self.pool = ConnectionPool(connection_url)
   
   # we want to commit data such as insert
   # be sure to check for RETURNING in all uppercases
-  def print_sql(self,title,sql)
+  def print_sql(self,title,sql):
     cyan = '\033[96m'
     no_color = '\033[0m'
     print("\n")
@@ -41,7 +41,7 @@ class Db:
         conn.commit()
         if is_returning_id:
           return returning_id
-    except Exception as err
+    except Exception as err:
       self.print_sql_err(err)
       #conn.rollback()
     
@@ -100,7 +100,7 @@ class Db:
     #print("\rextensions.Diagnostics:" err.diag)
 
     print("pgerror:", err.pgerror)
-    print("pgcode:" err.pgcode, "\n")
+    #print("pgcode:" err.pgcode, "\n")
 
 db = Db()
 
