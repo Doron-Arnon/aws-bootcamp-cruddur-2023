@@ -99,7 +99,7 @@ class Db:
 
     #print("\rextensions.Diagnostics:" err.diag)
 
-    print("pgerror:", err.pgerror)
+    #print("pgerror:", err.pgerror)
     #print("pgcode:" err.pgcode, "\n")
 
 db = Db()
