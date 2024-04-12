@@ -27,6 +27,7 @@ class Db:
     print("\n")
     print(f'{cyan}SQL STATEMENT-[{title}]------{no_color}')
     print(sql + "\n")
+
   def query_commit(self,sql,params):
     self.print_sql('commit_with_reurning',sql)   
     pattern = r"\bRETURNING\b"
@@ -46,13 +47,13 @@ class Db:
       #conn.rollback()
     
   # when we want to return a json object
-  def query_array_json(self,sql):
+  def query_array_json(self,sql,params={}):
     print("SQL STATEMENT-[array]-----")
     print(sql + "\n")
     wrapped_sql = self.query_wrap_array(sql)
     with self.pool.connection() as conn:
         with conn.cursor() as cur:
-          cur.execute(wrapped_sql)
+          cur.execute(wrapped_sql,params)
           # this will return a tuple
           # the first field being the data
           json = cur.fetchone()
