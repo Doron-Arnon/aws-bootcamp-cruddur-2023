@@ -9,7 +9,8 @@ class Db:
     self.init_pool()
 
   def template(self,name):
-    template_path = os.path.join(app.root_path,'db','sql',name + '.sql')    
+    template_path = os.path.join(app.root_path,'db','sql',name + '.sql')
+    print(template_path)    
     with open(template_path, 'r') as f:
       template_content = f.read()
     return template_content
@@ -25,8 +26,8 @@ class Db:
     cyan = '\033[96m'
     no_color = '\033[0m'
     print("\n")
-    print(f'{cyan}SQL STATEMENT-[{title}]------{no_color}')
-    print(sql + "\n")
+    print(f"{cyan}SQL STATEMENT-[{title}]------{no_color}")
+    
 
   def query_commit(self,sql,params):
     self.print_sql('commit_with_reurning',sql)   
@@ -48,6 +49,7 @@ class Db:
     
   # when we want to return a json object
   def query_array_json(self,sql,params={}):
+    print('-----------------------------------------')
     self.print_sql('array',sql)
     wrapped_sql = self.query_wrap_array(sql)
     with self.pool.connection() as conn:

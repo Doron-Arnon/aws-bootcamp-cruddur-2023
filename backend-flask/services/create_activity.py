@@ -50,7 +50,7 @@ class CreateActivity:
       CreateActivity.create_activity(user_handle, message, expires_at)
       model['data'] = {
         'uuid': uuid.uuid4(),
-        'display_name': 'Andrew Brown',
+        'display_name': 'cruddur_yes_username',
         'handle':  user_handle,
         'message': message,
         'created_at': now.isoformat(),
@@ -60,6 +60,7 @@ class CreateActivity:
 
   def create_activity(handle, message, expires_at):
     sql = db.template('create_activity')
+    print(sql)
     uuid = db.query_commit(sql,{
       'handle':handle,
       'message':message,

@@ -2,6 +2,7 @@ from flask import Flask
 from flask import request
 from flask_cors import CORS, cross_origin
 import os
+import sys
 
 from lib.cognito_jwt_token import CognitoJwtToken, extract_access_token, TokenVerifyError
 
@@ -169,7 +170,7 @@ def data_home():
     claims = cognito_jwt_token.verify(access_token)
     # authenticated request
     #app.logger.debug("authenticated")
-    #app.logger.debug(claims);
+    #app.logger.debug(claims)
     data = HomeActivities.run(cognito_user_id=claims['username'])
   except TokenVerifyError as e:
     #app.logger.debug("unauthenticated")
@@ -203,10 +204,13 @@ def data_search():
 @app.route("/api/activities", methods=['POST','OPTIONS'])
 @cross_origin()
 def data_activities():
-  user_handle  = 'andrewbrown'
+  user_handle  = 'cruddur_yes_username'
   message = request.json['message']
   ttl = request.json['ttl']
+  print('---------begin create activity----------')
   model = CreateActivity.run(message, user_handle, ttl)
+  print('-------end create activity---------')
+  print()
   if model['errors'] is not None:
     return model['errors'], 422
   else:

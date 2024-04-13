@@ -6,7 +6,7 @@ tracer = trace.get_tracer("home.activities")
 
 class HomeActivities:
   def run(cognito_user_id=None):
-    print("HOME ACTIVITY")
+    print("HOME ACTIVITIES")
     #logger.info("HomeActivities")
     with tracer.start_as_current_span("home-activites-mock-data"):
       span = trace.get_current_span()
