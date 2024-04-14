@@ -9,7 +9,7 @@ class Db:
     self.init_pool()
 
   def template(self,*args):
-    pathing = list({app.root_path,'db','sql',} + args)
+    pathing = list((app.root_path,'db','sql',) + args)
     pathing[-1] = pathing[-1] + ".sql"
 
     template_path = os.path.join(*pathing)
@@ -88,7 +88,7 @@ class Db:
           json = cur.fetchone()
           if json == None:
             "{}"
-          else
+          else:
             return json[0]
 
 
