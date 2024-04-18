@@ -18,3 +18,5 @@ flask-awscognito
 
 psycopg[binary]
 psycopg[pool]
+
+boto3
