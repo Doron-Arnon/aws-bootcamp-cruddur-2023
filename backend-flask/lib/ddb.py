@@ -26,12 +26,14 @@ class Ddb:
       }
     }
     print('query-params:',query_params)
-    print('items:', items)
+    
 
     # query the table
     response = client.query(**query_params)
     items = response['Items']
     
+    print('items:', items)
+
     results = []
     for item in items:
       last_sent_at = item['sk']['S']
