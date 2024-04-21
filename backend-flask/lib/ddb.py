@@ -26,7 +26,7 @@ class Ddb:
       }
     }
     print('query-params:',query_params)
-    print('items:' items)
+    print('items:', items)
 
     # query the table
     response = client.query(**query_params)
