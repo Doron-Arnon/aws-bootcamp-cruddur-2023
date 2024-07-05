@@ -1,10 +1,10 @@
 #!/usr/bin/env node
 import 'source-map-support/register';
 import * as cdk from 'aws-cdk-lib';
-import { ThumbingServerlessCdkStack } from '../lib/thumbing-serverless-cdk-stack';
+import { ThumblingServerlessCdkStack} from '../lib/thumbling-serverless-cdk-stack';
 
 const app = new cdk.App();
-new ThumbingServerlessCdkStack(app, 'ThumbingServerlessCdkStack', {
+new ThumblingServerlessCdkStack(app, 'ThumblingServerlessCdkStack', {
   /* If you don't specify 'env', this stack will be environment-agnostic.
    * Account/Region-dependent features and context lookups will not work,
    * but a single synthesized template can be deployed anywhere. */

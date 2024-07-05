@@ -1,8 +1,8 @@
 {
-  "name": "thumbing-serverless-cdk",
+  "name": "thumbling-serverless-cdk",
   "version": "0.1.0",
   "bin": {
-    "thumbing-serverless-cdk": "bin/thumbing-serverless-cdk.js"
+    "thumbling-serverless-cdk": "bin/thumbling-serverless-cdk.js"
   },
   "scripts": {
     "build": "tsc",
