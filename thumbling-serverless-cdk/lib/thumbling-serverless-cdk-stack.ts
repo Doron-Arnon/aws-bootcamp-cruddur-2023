@@ -1,5 +1,6 @@
 import * as cdk from 'aws-cdk-lib';
 import * as s3 from 'aws-cdk-lib/aws-s3'
+import * as lambda from 'aws-cdk-lib/aws-lambda'
 import { Construct } from 'constructs';
 
 export class ThumblingServerlessCdkStack extends cdk.Stack {
@@ -8,6 +9,7 @@ export class ThumblingServerlessCdkStack extends cdk.Stack {
 
     // The code that defines your stack goes here
     const bucketName: string = process.env.THUMBING_BUCKET_NAME as string;
+    const functionPath: string = process.env.THUMBING_FUNCTION_NAME as string;
     const bucket = this.createBucket(bucketName);
   }
 
@@ -17,5 +19,14 @@ export class ThumblingServerlessCdkStack extends cdk.Stack {
       removalPolicy: cdk.RemovalPolicy.DESTROY
     });
     return bucket;
+  }
+
+  createLambda(functionPath: string): lambda.IFunction{
+    const lambdaFunction = new lambda.Function(this,'ThumbLambda',{
+      runtime: lambda.Runtime.NODEJS_18_X,
+      handler: 'index.handler',
+      code: lambda.Code.fromAsset(functionPath)
+    });
+    return lambdaFunction;
   }
 }
