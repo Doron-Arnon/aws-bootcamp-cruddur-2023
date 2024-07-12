@@ -39,7 +39,15 @@ tasks:
       npm install aws-cdk -g
       cd thumbling-serverless-cdk
       cp .env.example .env
-      npm i
+      npm install
+      rm -rf node_modules/sharp
+      SHARP_IGNORE_GLOBAL_LIBVIPS=1 npm install --arch=x64 --platform=linux --libc=glibc sharp
+  - name: aws
+    before: |
+      cd aws/lambdas/process-images
+      npm install
+      rm -rf node_modules/sharp
+      SHARP_IGNORE_GLOBAL_LIBVIPS=1 npm install --arch=x64 --platform=linux --libc=glibc sharp
 vscode:
   extensions:
     - 42Crunch.vscode-openapi
