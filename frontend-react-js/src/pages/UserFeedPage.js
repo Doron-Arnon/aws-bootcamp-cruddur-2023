@@ -68,7 +68,7 @@ export default function UserFeedPage() {
           <div className='activity_feed_heading'>
             <div className='title'>{title}</div>
           </div>
-          <ActivityFeed title={title} activities={activities} />
+          <ActivityFeed activities={activities} />
         </div>     
       </div>
       <DesktopSidebar user={user} />
