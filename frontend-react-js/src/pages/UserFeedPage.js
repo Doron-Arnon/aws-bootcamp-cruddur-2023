@@ -10,7 +10,6 @@ import ProfileHeading from '../components/ProfileHeading';
 
 
 import {checkAuth, getAccessToken} from '../lib/CheckAuth'
-import ProfileHeading from '../components/ProfileHeading';
 
 export default function UserFeedPage() {
   const [activities, setActivities] = React.useState([]);
@@ -59,9 +58,9 @@ export default function UserFeedPage() {
       <DesktopNavigation user={user} active={'profile'} setPopped={setPopped} />
       <div className='content'>
         <ActivityForm popped={popped} setActivities={setActivities} />
+
         <div className='activity_feed'>
-          <ProfileHeading setPopped={setPoppedProfile} />
-          <ProfileHeading profile={profile}/>
+          <ProfileHeading setPopped={setPoppedProfile} profile={profile} />
           <ActivityFeed activities={activities} />
         </div>     
       </div>
