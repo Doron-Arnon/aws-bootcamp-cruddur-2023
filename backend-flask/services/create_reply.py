@@ -30,7 +30,7 @@ class CreateReply:
       now = datetime.now(timezone.utc).astimezone()
       model['data'] = {
         'uuid': uuid.uuid4(),
-        'display_name': 'Andrew Brown',
+        'display_name': 'cruddur_yes_name',
         'handle':  user_handle,
         'message': message,
         'created_at': now.isoformat(),

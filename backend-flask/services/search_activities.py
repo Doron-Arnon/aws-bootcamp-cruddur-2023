@@ -11,9 +11,9 @@ class SearchActivities:
     if search_term == None or len(search_term) < 1:
       model['errors'] = ['search_term_blank']
     else:
-      results = [{
-        'uuid': '248959df-3079-4947-b847-9e0892d1bab4',
-        'handle':  'Andrew Brown',
+      results = [{            
+        'uuid': '68e29e44-9f17-4297-914e-49f0cfcfa152',
+        'handle':  'cruddur_yes_name',
         'message': 'Cloud is fun!',
         'created_at': now.isoformat()
       }]
